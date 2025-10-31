@@ -18,6 +18,7 @@
             --text-secondary: #BDC1C6;
             --accent-blue: #89B4F8;
             --accent-purple: #B197FC;
+            --accent-green: #80CFA9; /* Nuevo color para Judicial */
             --border-color: #3C4043;
         }
 
@@ -245,6 +246,92 @@
             transform: translateY(0);
         }
 
+        /* 8. Estilos para la Animación de Poderes (AÑADIDO) */
+        .anim-container-equilibrio, .anim-container-concentracion {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 150px;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border-color);
+            margin-top: 1.5rem;
+        }
+
+        .power-block {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            border-radius: 8px;
+        }
+
+        /* Modelo 1: Equilibrio */
+        .anim-container-equilibrio .ejecutivo {
+            background-color: var(--accent-blue);
+            color: var(--bg-dark-primary);
+            animation: pulse 2s infinite ease-in-out;
+        }
+        .anim-container-equilibrio .legislativo {
+            background-color: var(--accent-purple);
+            color: var(--bg-dark-primary);
+            animation: pulse 2s infinite ease-in-out 0.5s;
+        }
+        .anim-container-equilibrio .judicial {
+            background-color: var(--accent-green);
+            color: var(--bg-dark-primary);
+            animation: pulse 2s infinite ease-in-out 1s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* Modelo 2: Concentración */
+        .anim-container-concentracion .power-block {
+            position: absolute;
+        }
+        .ejecutivo-c {
+            background-color: var(--accent-blue);
+            color: var(--bg-dark-primary);
+            left: 50%;
+            transform: translateX(-50%);
+            animation: dominar 4s infinite ease-in-out 1s;
+            z-index: 10;
+        }
+        .legislativo-c {
+            background-color: var(--accent-purple);
+            color: var(--bg-dark-primary);
+            left: 20%;
+            animation: absorber-l 4s infinite ease-in-out 1s;
+            z-index: 5;
+        }
+        .judicial-c {
+            background-color: var(--accent-green);
+            color: var(--bg-dark-primary);
+            right: 20%;
+            animation: absorber-j 4s infinite ease-in-out 1s;
+            z-index: 5;
+        }
+
+        @keyframes dominar {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.8); }
+        }
+        @keyframes absorber-l {
+            0%, 100% { left: 20%; opacity: 1; transform: scale(1); }
+            50% { left: 50%; opacity: 0; transform: translateX(-50%) scale(0.3); }
+        }
+        @keyframes absorber-j {
+            0%, 100% { right: 20%; opacity: 1; transform: scale(1); }
+            50% { right: 50%; opacity: 0; transform: translateX(50%) scale(0.3); }
+        }
+
     </style>
 </head>
 <body>
@@ -256,7 +343,7 @@
                 <li><a href="#definicion">Definición</a></li>
                 <li><a href="#tipos">Tipologías</a></li>
                 <li><a href="#componentes">Componentes</a></li>
-            </ul>
+                <li><a href="#ejemplo">Ejemplo</a></li> <li><a href="#conclusion">Conclusión</a></li> </ul>
         </div>
     </nav>
 
@@ -317,6 +404,39 @@
                     <p>Responsable de interpretar las leyes, administrar justicia y resolver las controversias, asegurando el cumplimiento del ordenamiento jurídico.</p>
                 </div>
             </div>
+        </section>
+
+        <section id="ejemplo">
+            <h2 class="reveal">Ejemplo Animado: Equilibrio vs. Concentración</h2>
+            <p class="reveal">A continuación, se ilustra la diferencia funcional entre un régimen con división de poderes (equilibrio) y uno con poder concentrado (autoritarismo).</p>
+            
+            <div class="card-container">
+                <div class="card reveal" style="transition-delay: 100ms;">
+                    <h3>Modelo 1: División y Equilibrio</h3>
+                    <p>Los poderes son distintos y se controlan mutuamente (Frenos y Contrapesos). Esto genera estabilidad y protege la libertad.</p>
+                    <div class="anim-container-equilibrio">
+                        <div class="power-block ejecutivo">E</div>
+                        <div class="power-block legislativo">L</div>
+                        <div class="power-block judicial">J</div>
+                    </div>
+                </div>
+                
+                <div class="card reveal" style="transition-delay: 200ms;">
+                    <h3>Modelo 2: Concentración del Poder</h3>
+                    <p>Un poder (o una élite) absorbe las funciones de los demás. Esto elimina los controles y conduce al abuso de autoridad.</p>
+                    <div class="anim-container-concentracion">
+                        <div class="power-block ejecutivo-c">E</div>
+                        <div class="power-block legislativo-c">L</div>
+                        <div class="power-block judicial-c">J</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion">
+            <h2 class="reveal">Conclusión: La Arquitectura del Poder</h2>
+            <p class="reveal">En síntesis, el régimen político trasciende la teoría; es la arquitectura funcional del poder. Define la relación esencial entre los gobernantes y los gobernados, estableciendo los cauces para la participación ciudadana y, crucialmente, los límites de la autoridad estatal.</p>
+            <p class="reveal">Su estudio es fundamental, pues la naturaleza del régimen (sea democrático, autoritario o totalitario) impacta directamente en el nivel de libertades, la previsibilidad de la justicia y el grado en que la soberanía popular se traduce en acción gubernamental. Es, en esencia, el manual que determina la vida pública de una sociedad.</p>
         </section>
 
     </main>
