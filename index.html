@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exposición: El Régimen Político</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 1. Configuración de Smooth Scroll y Paleta Gemini Dark */
+        :root {
+            --bg-dark-primary: #131314;
+            --bg-dark-secondary: #1E1F20;
+            --text-primary: #E8EAED;
+            --text-secondary: #BDC1C6;
+            --accent-blue: #89B4F8;
+            --accent-purple: #B197FC;
+            --border-color: #3C4043;
+        }
+
+        html {
+            /* Navegación fluida (Smooth Scroll) */
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--bg-dark-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* 2. Navbar con Efecto "Glassmorphism" (Agenda) */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(30, 31, 32, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 65px;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 2.5rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.9rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* 3. Sección de Encabezado (Diapositiva de Título) */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh; /* Ocupa toda la pantalla inicial */
+            padding-top: 65px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem; /* Más grande para impacto inicial */
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--text-primary), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        /* 4. Contenido Principal y Secciones (Diapositivas) */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding-top: 100px; /* Anclaje de navegación */
+            padding-bottom: 80px;
+            border-bottom: 1px solid var(--border-color);
+            min-height: 60vh; /* Da espacio a cada "diapositiva" */
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2.8rem; /* Títulos de diapositiva claros */
+            color: var(--accent-blue);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        p, li {
+            font-size: 1.15rem; /* Texto más legible para exposición */
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            max-width: 900px; /* Líneas de texto más enfocadas */
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+        
+        li {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        li::before {
+            content: '■'; /* Viñeta minimalista */
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+            font-size: 1.2rem;
+        }
+
+        /* 5. Tarjetas (Puntos clave de la diapositiva) */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background-color: var(--bg-dark-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(137, 180, 248, 0.15); /* Efecto "Glow" */
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: var(--accent-purple);
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .card p {
+            font-size: 1.05rem; /* Texto de tarjeta más denso */
+            color: var(--text-secondary);
+        }
+
+        /* 6. Pie de Página (Diapositiva de Cierre) */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            font-weight: 300;
+        }
+        
+        /* 7. Animación de entrada (Ritmo de la exposición) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="nav-logo">Inicio</a>
+            <ul class="nav-menu">
+                <li><a href="#definicion">Definición</a></li>
+                <li><a href="#tipos">Tipologías</a></li>
+                <li><a href="#componentes">Componentes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="inicio" class="hero">
+        <div class="hero-content reveal">
+            <h1>Régimen Político: La Estructura de la Autoridad</h1>
+            <p>Una exposición sobre las reglas que legitiman y organizan el poder en la sociedad.</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section id="definicion" class="reveal">
+            <h2>El Concepto Central: La Tríada</h2>
+            <p>Para empezar, debemos diferenciar los tres conceptos clave que a menudo se confunden:</p>
+            <ul>
+                <li><strong>Estado:</strong> La institución permanente. Es el "edificio" (territorio, población, soberanía).</li>
+                <li><strong>Gobierno:</strong> Los actores temporales. Son los "administradores" del edificio (presidentes, ministros).</li>
+                <li><strong>Régimen Político:</strong> El punto clave. Son las "reglas de uso" del edificio. El manual que define cómo se elige al administrador y qué puede hacer.</li>
+            </ul>
+        </section>
+
+        <section id="tipos">
+            <h2 class="reveal">Tipologías: Tres Modelos de Poder</h2>
+            <p class="reveal">Estos "manuales" o regímenes, se pueden clasificar en tres grandes modelos, según cómo distribuyen el poder.</p>
+            
+            <div class="card-container">
+                <div class="card reveal" style="transition-delay: 100ms;">
+                    <h3>Democrático</h3>
+                    <p>La legitimidad viene desde abajo. El poder se basa en la Soberanía Popular. Requiere elecciones libres, pluralismo y rendición de cuentas.</p>
+                </div>
+                <div class="card reveal" style="transition-delay: 200ms;">
+                    <h3>Autoritario</h3>
+                    <p>La legitimidad se impone desde arriba. El poder se concentra en una élite. Suprime la oposición política, pero permite un pluralismo limitado en lo social o económico.</p>
+                </div>
+                <div class="card reveal" style="transition-delay: 300ms;">
+                    <h3>Totalitario</h3>
+                    <p>El régimen absorbe a la sociedad. Busca el control absoluto de la vida pública y privada a través de una ideología única. No hay pluralismo de ningún tipo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="componentes">
+            <h2 class="reveal">La Maquinaria: Separación de Poderes</h2>
+            <p class="reveal">Para evitar que el poder se concentre (como en el autoritarismo), los regímenes democráticos modernos lo dividen. Esta es la maquinaria interna del Estado.</p>
+
+            <div class="card-container">
+                <div class="card reveal" style="transition-delay: 100ms;">
+                    <h3>Poder Ejecutivo</h3>
+                    <p>La <strong>Acción</strong>. Administra el Estado y ejecuta las leyes. Es el motor del día a día.</p>
+                </div>
+                <div class="card reveal" style="transition-delay: 200ms;">
+                    <h3>Poder Legislativo</h3>
+                    <p>La <strong>Deliberación</strong>. Representa a la ciudadanía y crea el marco legal. Es quien define las reglas.</p>
+                </div>
+                <div class="card reveal" style="transition-delay: 300ms;">
+                    <h3>Poder Judicial</h3>
+                    <p>El <strong>Arbitraje</strong>. Interpreta las leyes y resuelve conflictos. Es quien garantiza que se cumplan las reglas.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="reveal">
+        <p>Conclusión. Material de Análisis para Ciencias Sociales.</p>
+        <p>Fin de la exposición.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1 // Activar cuando el 10% del elemento sea visible
+        });
+
+        const hiddenElements = document.querySelectorAll('.reveal');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+
+</body>
+</html>
